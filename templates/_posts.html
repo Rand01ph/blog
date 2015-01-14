@@ -2,24 +2,23 @@
     {% for post in posts %}
     <li class="post">
         <div class="post-content">
-            <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>
+            <div class="post-date">{{ moment(post.timestamp).format('LLL') }}</div>
+            <div class="post-title">
+                <h1>{{ post.title }}</h1>
+            </div>
             <div class="post-body">
-                {% if post.body_html %}
-                    {{ post.body_html | safe }}
-                {% else %}
-                    {{ post.text }}
-                {% endif %}
+                    <h>{{ post.text }}</h>
             </div>
             <div class="post-footer">
                 {% if current_user.is_authenticated() %}
-                <a href="{{ url_for('.edit', id=post.id) }}">
+                <a href="{{ url_for('edit', id=post.id) }}">
                     <span class="label label-primary">编辑</span>
                 </a>
                 {% endif %}
-                <a href="{{ url_for('.post', id=post.id) }}">
-                    <span class="label label-default">Permalink</span>
+                <a href="{{ url_for('post', id=post.id) }}">
+                    <span class="label label-default">查看全文</span>
                 </a>
-                <a href="{{ url_for('.post', id=post.id) }}#comments">
+                <a href="{{ url_for('post', id=post.id) }}#comments">
                     <span class="label label-primary">{{ post.comments.count() }} 评论</span>
                 </a>
             </div>
