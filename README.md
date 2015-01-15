@@ -1,2 +1,2 @@
 # blog
-a blog by flask
+a simple blog demo by flask
